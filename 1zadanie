@@ -1,0 +1,18 @@
+def is_true(x): #проверка истинности
+    return x == '1'
+def min_dnf(func): #создание минимальной ДНФ
+    mass = []
+    for i in range(len(func)): #проходим по каждому символу
+        if is_true(func[i]):
+            mas = []
+            for j in range(5):
+                if i % 2**(4-j) >= 2**(4-j):  #определяем значения переменной
+                    mas.append('x' + str(j + 1))  #добавляем переменную
+                else:
+                    mas.append('¬x' + str(j + 1))  #добавляем отрицание переменной
+            mass.append('(' + ' ∧ '.join(mas) + ')')
+    return ' ∨ '.join(mass)
+if __name__ == "__main__":
+    func = "0000****11001000011****11000*101" #вводные данные
+    min_dnf = min_dnf(func) 
+    print("Минимальная ДНФ:", min_dnf) #вывод результата
